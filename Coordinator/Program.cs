@@ -1,6 +1,7 @@
 
 using Coordinator.Models.Contexts;
 using Coordinator.Services.Abstraction;
+using Coordinator.Services.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace Coordinator
@@ -19,7 +20,7 @@ namespace Coordinator
             builder.Services.AddHttpClient("StockAPI", client => client.BaseAddress = new("https://localhost:7252/"));
             builder.Services.AddHttpClient("PaymentAPI", client => client.BaseAddress = new("https://localhost:7009/"));
 
-            builder.Services.AddSingleton<ITransactionService, ITransactionService>();
+            builder.Services.AddTransient<ITransactionService, TransactionService>();
 
             var app = builder.Build();
 
